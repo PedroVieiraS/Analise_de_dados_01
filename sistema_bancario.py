@@ -1,10 +1,7 @@
-
 # 1 - criar logica que verifica o saldo de uma conta corrente
 # 2 - criar segunda conta corrente, para simular saque, deposito e transferencia.
 # 3 - criar um menu que permite ao usuario realizar N transações ate que el opte por sair.
-
 import os
-
 
 logado = True
 banco = {
