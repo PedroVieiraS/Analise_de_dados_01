@@ -15,13 +15,18 @@ def limpar_tela():
 
 def login():
         num_conta = input("digite sua conta")
-        senha = input("digite sua conta")
+        senha = input("digite sua senha")
         
         conta = contas.get(num_conta)
         
         if conta and conta.senha == senha:
             print(f"Seja bem-vindo(a), {conta.num_conta}")
+            return conta
+        else:
+            print("login invalido")
+            login()
 
+conta_logada = login()
 
 while logado:
     print("""
@@ -33,11 +38,12 @@ while logado:
     4 - Depositar
     5 - Sair
     """)
+    
     pergunta = int(input("Escolha uma operação: "))
 
     match pergunta:
         case 0:
-            contas["1234-5"].consutar_saldo()
+            conta_logada.consutar_saldo()
         case 1:
             limpar_tela()
             # for i in contas:
@@ -45,15 +51,20 @@ while logado:
         case 2:
             limpar_tela()
             valor =  float(input("Escolha o valor"))
-            conta1.transferir(conta2,valor)
+            num_conta_destino = input("Digite a conta do destinatario: ")
+
+            if num_conta_destino in contas and num_conta_destino != conta_logada.num_conta:
+                conta_logada.transferir(contas[num_conta_destino],valor)
+            else:
+                print("Conta destino não encontrada")
         case 3:
             limpar_tela()
             valor =  float(input("Escolha o valor"))
-            conta1.sacar(valor)
+            conta_logada.sacar(valor)
         case 4:
             limpar_tela()
             valor =  float(input("Escolha o valor"))
-            conta1.depositar(valor)
+            conta_logada.depositar(valor)
         case 5:
             logado = False
             print("Você saiu do sistema.")
